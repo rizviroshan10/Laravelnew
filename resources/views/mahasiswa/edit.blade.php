@@ -9,20 +9,20 @@
                   <p class="card-description">
                     Formulir Edit Mahasiswa
                   </p>
-                  <form class="forms-sample" action="{{ route('mahasiswa.store') }}" method="post" enctype="multipart/form-data">
+                  <form class="forms-sample" action="{{ route('mahasiswa.update', $mahasiswa->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('patch')
                     <div class="row">
                         <div class="form-group col-lg-6">
                         <label for="npm">Nomor Pokok Mahasiswa</label>
-                        <input type="text" class="form-control" name="npm" placeholder="Nomor Pokok Mahasiswa" value="{{ old('npm') }}">
+                        <input type="text" class="form-control" name="npm" placeholder="Nomor Pokok Mahasiswa" value="{{ $mahasiswa->npm }}" disabled>
                         @error('npm')
                                 <span class="text-danger">{{ $message }}</span>
                         @enderror
                         </div>
                         <div class="form-group col-lg-6">
                         <label for="nama">Nama Mahasiswa</label>
-                        <input type="text" class="form-control" name="nama" placeholder="Nama Mahasiswa" value="{{ old('nama') }}">
+                        <input type="text" class="form-control" name="nama" placeholder="Nama Mahasiswa" value="{{ $mahasiswa->nama }}">
                         @error('nama')
                                 <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -31,14 +31,14 @@
                     <div class="row">
                         <div class="form-group col-lg-6">
                         <label for="kota_lahir">Kota Lahir</label>
-                        <input type="text" class="form-control" name="kota_lahir" placeholder="Nama Kota Lahir" value="{{ old('kota_lahir') }}">
+                        <input type="text" class="form-control" name="kota_lahir" placeholder="Nama Kota Lahir" value="{{ $mahasiswa->kota_lahir }}">
                         @error('kota_lahir')
                                 <span class="text-danger">{{ $message }}</span>
                         @enderror
                         </div>
                         <div class="form-group col-lg-6">
                         <label for="tanggal">Tanggal Lahir</label>
-                        <input type="date" class="form-control" name="tanggal" placeholder="" value="{{ old('tanggal') }}">
+                        <input type="date" class="form-control" name="tanggal" placeholder="" value="{{ $mahasiswa->tanggal }}">
                         @error('tanggal')
                                 <span class="text-danger">{{ $message }}</span>
                         @enderror

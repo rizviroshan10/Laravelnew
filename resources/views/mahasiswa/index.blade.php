@@ -44,6 +44,8 @@
                         <td>  {{ $item->prodi->nama_prodi}}</td>
                         <td>  {{ $item->created_at}}  </td>
                         <td>
+                            <div class="d-flex justify-content-between">
+                                <a href="{{route('mahasiswa.edit', $item->id)}}"><button class="btn btn-success btn-sm">Edit</a>
                             <form method="post" class="delete-form" data-route="{{ route('mahasiswa.destroy',$item->id) }}">
                                 @method('delete')
                                 @csrf

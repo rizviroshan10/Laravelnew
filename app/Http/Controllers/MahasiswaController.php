@@ -71,7 +71,8 @@ class MahasiswaController extends Controller
      */
     public function edit(Mahasiswa $mahasiswa)
     {
-        //
+        $prodi = Prodi::orderBy('nama_prodi', 'ASC')->get();
+        return view('mahasiswa.edit')->with('mahasiswa', $mahasiswa)->with('prodi', $prodi);
     }
 
     /**
@@ -79,7 +80,29 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, Mahasiswa $mahasiswa)
     {
-        //
+        $validasi = $request->validate([
+            'nama' => 'required',
+            'kota_lahir' => 'required',
+            'tanggal' => 'required',
+            'prodi_id' => 'required',
+            'foto' => 'required|file|image'
+        ]);
+        //masih pake npm yang lama
+        $mahasiswa->npm = $mahasiswa->npm;
+        $mahasiswa->nama = $validasi['nama'];
+        $mahasiswa->kota_lahir = $validasi['kota_lahir'];
+        $mahasiswa->tanggal = $validasi['tanggal'];
+        $mahasiswa->prodi_id = $validasi['prodi_id'];
+
+        // upload foto
+        $ext = $request->foto->getClientOriginalExtension();
+        $new_filename = $mahasiswa->npm.".".$ext;
+        $request->foto->storeAs('public', $new_filename);
+
+        $mahasiswa->foto = $new_filename;
+        $mahasiswa->save(); // simpan
+
+        return redirect()->route('mahasiswa.index')->with('success', "Data mahasiswa " . $validasi['nama'] . " berhasil disimpan");
     }
 
     /**
