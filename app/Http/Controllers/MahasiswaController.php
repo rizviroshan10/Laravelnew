@@ -89,7 +89,8 @@ class MahasiswaController extends Controller
     {
         // dd($mahasiswa);
         $mahasiswa->delete();
-        return redirect()->route('mahasiswa.index')->with('success', 'Data berhasil dihapus');
+        //return redirect()->route('mahasiswa.index')->with('success', 'Data berhasil dihapus');
+        return response("Selected mahasiswa (s) deleted successfully.",200);
     }
 
     public function multiDelete(Request $request) 

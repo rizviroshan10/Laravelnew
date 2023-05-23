@@ -68,7 +68,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
 
-    // $("#posts-table").TableCheckAll();
+    $("#posts-table").TableCheckAll();
 
     $('#multi-delete').on('click', function() {
         var button = $(this);
@@ -103,7 +103,7 @@
                     showCancelButton: false,
                     confirmButtonText: 'Yes'
                 }).then((result) => {
-                window.location='/posts'
+                window.location='/mahasiswa'
                 });
             }
             });
@@ -141,7 +141,7 @@
                     showCancelButton: false,
                     confirmButtonText: 'Yes'
                 }).then((result) => {
-                window.location='/posts'
+                window.location='/mahasiswa'
                 });
             }
             });
