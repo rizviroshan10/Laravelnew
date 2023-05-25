@@ -11,9 +11,20 @@ class MahasiswaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $mahasiswa = Mahasiswa::all();
+        $keyword = $request->query('search');
+
+        if ($keyword){
+
+            $mahasiswa = Mahasiswa::where
+            ('nama','LIKE',"%{$keyword}%") -> paginate(10);
+        }
+        else{
+            $mahasiswa = Mahasiswa::paginate(10);
+
+        }
+
         return view('mahasiswa.index')->with('mahasiswas', $mahasiswa);
     }
 
@@ -116,7 +127,7 @@ class MahasiswaController extends Controller
         return response("Selected mahasiswa (s) deleted successfully.",200);
     }
 
-    public function multiDelete(Request $request) 
+    public function multiDelete(Request $request)
     {
         Mahasiswa::whereIn('id', $request->get('selected'))->delete();
 
